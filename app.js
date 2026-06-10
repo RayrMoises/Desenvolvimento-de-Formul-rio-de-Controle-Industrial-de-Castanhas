@@ -69,73 +69,6 @@ document.querySelectorAll(".rating").forEach(group => {
 
 });
 
-// DADOS DE TESTE
-
-const disponiveis = `
-<div class="card-processo">
-<h4>M014</h4>
-<p>Sub-lote 1</p>
-<strong>1500 kg</strong>
-</div>
-
-<div class="card-processo">
-<h4>M015</h4>
-<p>Sub-lote 2</p>
-<strong>2300 kg</strong>
-</div>
-
-<div class="card-processo">
-<h4>M016</h4>
-<p>Sub-lote 1</p>
-<strong>980 kg</strong>
-</div>
-`;
-
-const andamento = `
-<div class="card-processo">
-<h4>M014</h4>
-<p>Quebra Mecânica</p>
-<strong>Em andamento</strong>
-</div>
-
-<div class="card-processo">
-<h4>M015</h4>
-<p>Classificação</p>
-<strong>Em andamento</strong>
-</div>
-
-<div class="card-processo">
-<h4>M016</h4>
-<p>Secagem</p>
-<strong>Em andamento</strong>
-</div>
-`;
-
-const conteudo = document.getElementById("conteudoPainel");
-
-const btnDisponivel =
-document.getElementById("btnDisponivel");
-
-const btnAndamento =
-document.getElementById("btnAndamento");
-
-btnDisponivel.addEventListener("click", () => {
-
-    btnDisponivel.classList.add("active-panel");
-    btnAndamento.classList.remove("active-panel");
-
-    conteudo.innerHTML = disponiveis;
-
-});
-
-btnAndamento.addEventListener("click", () => {
-
-    btnAndamento.classList.add("active-panel");
-    btnDisponivel.classList.remove("active-panel");
-
-    conteudo.innerHTML = andamento;
-
-});
 
 // FORMULÁRIO
 
@@ -148,3 +81,34 @@ document
     alert("Registro salvo (modo demonstração)");
 
 });
+
+const URL_API = "https://script.google.com/macros/s/AKfycbyDHlW7aB73tZ9E2pLifoX3lRSryHUWfiVP7VrsvHP0Ow6rJOzYNl7JzZ00gX-zObTD/exec";
+
+fetch(URL_API)
+    .then(response => response.json())
+    .then(data => {
+
+        const conteudo =
+            document.getElementById("conteudoPainel");
+
+        conteudo.innerHTML = `
+            <div class="card-processo">
+                <h4>Disponível</h4>
+                <p>Castanha Dry</p>
+                <strong>${data.quantidade} kg</strong>
+            </div>
+        `;
+
+    })
+    .catch(error => {
+
+        console.error(error);
+
+        document.getElementById(
+            "conteudoPainel"
+        ).innerHTML = `
+            <div class="card-vazio">
+                Erro ao carregar dados.
+            </div>
+        `;
+    });

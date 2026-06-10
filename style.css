@@ -339,6 +339,21 @@ textarea{
     color:white;
 }
 
+.card-vazio{
+
+    background:#f4f4f4;
+
+    padding:20px;
+
+    border-radius:12px;
+
+    text-align:center;
+
+    color:var(--texto-secundario);
+
+    font-weight:500;
+}
+
 .card-processo{
 
     background:#f4f4f4;
