@@ -37,9 +37,14 @@ sizeButtons.forEach(btn => {
 
         btn.classList.add("active");
 
+        tamanhoSelecionado =
+            btn.dataset.size;
+
     });
 
 });
+
+let tamanhoSelecionado = "";
 
 // AVALIAÇÕES
 
@@ -72,43 +77,145 @@ document.querySelectorAll(".rating").forEach(group => {
 
 // FORMULÁRIO
 
+const URL_API ="https://script.google.com/macros/s/AKfycbzlrtcMPPUjewBRtmtGbH8v3-NhNZeBuInDamGY8Xithvd9GOHzO3MCNk8nC-HE7DFe/exec";
+
 document
 .getElementById("quebraForm")
-.addEventListener("submit", e => {
+.addEventListener("submit", async (e) => {
 
     e.preventDefault();
 
-    alert("Registro salvo (modo demonstração)");
+        const dados = {
+
+            responsavel:
+                document.getElementById("responsavel").value,
+
+            lote:
+                document.getElementById("lote").value,
+
+            subLote:
+                document.getElementById("sublote").value,
+
+            data:
+                document.getElementById("data").value,
+
+            horaInicio:
+                document.getElementById("horaInicio").value,
+
+            inicioPosPausa:
+                document.getElementById("inicioPosPausa").value,
+
+            horaFinal:
+                document.getElementById("horaFinal").value,
+
+            pcdq:
+                document.getElementById("pcdq").value,
+
+            tamanho:
+                tamanhoSelecionado,
+
+            pesoInteira:
+                document.getElementById("pesoInteira").value,
+
+            pesoQuebrada:
+                document.getElementById("pesoQuebrada").value,
+
+            pesoFerida:
+                document.getElementById("pesoFerida").value,
+
+            pesoPodre:
+                document.getElementById("pesoPodre").value,
+
+            pesoAmarela:
+                document.getElementById("pesoAmarela").value,
+
+            avaliacaoVisual:
+                document.querySelector(".stars").dataset.rating,
+
+            produtividadeEquipe:
+                document.querySelector(".hearts").dataset.rating,
+
+            observacao:
+                document.getElementById("observacao").value
+
+        };
+
+    try {
+
+        const resposta = await fetch(URL_API, {
+
+            method: "POST",
+
+            body: JSON.stringify(dados)
+
+        });
+
+        const resultado =
+            await resposta.json();
+
+        console.log(resultado);
+
+        if(resultado.sucesso){
+
+            alert("Registro salvo!");
+
+        }else{
+
+            alert("Erro ao salvar.");
+
+        }
+
+    } catch(erro){
+
+        console.error(erro);
+
+        alert("Falha na comunicação.");
+
+    }
 
 });
 
-const URL_API = "https://script.google.com/macros/s/AKfycbyDHlW7aB73tZ9E2pLifoX3lRSryHUWfiVP7VrsvHP0Ow6rJOzYNl7JzZ00gX-zObTD/exec";
+// QUANTIDADE DISPONÍVEL
 
-fetch(URL_API)
-    .then(response => response.json())
-    .then(data => {
+async function carregarQuantidade() {
 
-        const conteudo =
-            document.getElementById("conteudoPainel");
+    try {
 
-        conteudo.innerHTML = `
+        const resposta =
+            await fetch(URL_API);
+
+        const dados =
+            await resposta.json();
+
+        document.getElementById("conteudoPainel").innerHTML = `
+
             <div class="card-processo">
-                <h4>Disponível</h4>
-                <p>Castanha Dry</p>
-                <strong>${data.quantidade} kg</strong>
+
+                <h3>Castanha Pré-Seca</h3>
+
+                <p>
+                    Disponível para quebra:
+                    <strong>${dados.quantidade} kg</strong>
+                </p>
+
             </div>
+
         `;
 
-    })
-    .catch(error => {
+    } catch (erro) {
 
-        console.error(error);
+        console.error(erro);
 
-        document.getElementById(
-            "conteudoPainel"
-        ).innerHTML = `
+        document.getElementById("conteudoPainel").innerHTML = `
+
             <div class="card-vazio">
-                Erro ao carregar dados.
+                Erro ao carregar quantidade.
             </div>
+
         `;
-    });
+
+    }
+
+}
+
+carregarQuantidade();

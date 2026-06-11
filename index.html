@@ -59,7 +59,7 @@
         <div id="conteudoPainel">
 
             <div class="card-vazio">
-                Nenhum lote disponível.
+                Carregando...
             </div>
 
         </div>
@@ -88,37 +88,37 @@
 
                     <div class="field">
                         <label>Responsável</label>
-                        <input type="text">
+                        <input id="responsavel" type="text">
                     </div>
 
                     <div class="field">
                         <label>Nº do Lote</label>
-                        <input type="text">
+                        <input id="lote" type="text">
                     </div>
 
                     <div class="field">
                         <label>Nº do Sub-lote</label>
-                        <input type="number">
+                        <input id="sublote" type="number">
                     </div>
 
                     <div class="field">
                         <label>Data</label>
-                        <input type="date">
+                        <input id="data" type="date">
                     </div>
 
                     <div class="field">
                         <label>Hora Início</label>
-                        <input type="time">
+                        <input id="horaInicio" type="time">
                     </div>
 
                     <div class="field">
                         <label>Inicio Pós Pausa</label>
-                        <input type="time">
+                        <input id="inicioPosPausa" type="time">
                     </div>
 
                     <div class="field">
                         <label>Hora Final</label>
-                        <input type="time">
+                        <input id="horaFinal" type="time">
                     </div>
 
                 </div>
@@ -137,7 +137,7 @@
 
                     <div class="field">
                         <label>Peso Castanha Dry Quebrada</label>
-                        <input type="number">
+                        <input id="pcdq" type="number">
                     </div>
 
                     <div class="field field-full">
@@ -146,21 +146,13 @@
 
                         <div class="size-buttons">
 
-                            <button type="button" class="size-btn">
-                                PEQUENA PP
-                            </button>
+                            <button type="button" class="size-btn" data-size="PEQUENA PP">PEQUENA PP</button>
 
-                            <button type="button" class="size-btn">
-                                PEQUENA
-                            </button>
+                            <button type="button" class="size-btn" data-size="PEQUENA">PEQUENA</button>
 
-                            <button type="button" class="size-btn">
-                                MÉDIA
-                            </button>
+                            <button type="button" class="size-btn" data-size="MEDIA">MÉDIA</button>
 
-                            <button type="button" class="size-btn">
-                                GRAÚDA
-                            </button>
+                            <button type="button" class="size-btn" data-size="GRAUDA">GRAÚDA</button>
 
                         </div>
 
@@ -168,27 +160,28 @@
 
                     <div class="field">
                         <label>Peso Inteira</label>
-                        <input type="number">
+                        <input id="pesoInteira" type="number">
+
                     </div>
 
                     <div class="field">
                         <label>Peso Quebrada</label>
-                        <input type="number">
+                        <input id="pesoQuebrada" type="number">
                     </div>
 
                     <div class="field">
                         <label>Peso Ferida</label>
-                        <input type="number">
+                        <input id="pesoFerida" type="number">
                     </div>
 
                     <div class="field">
                         <label>Peso Podre</label>
-                        <input type="number">
+                        <input id="pesoPodre" type="number">
                     </div>
 
                     <div class="field">
                         <label>Peso Amarela</label>
-                        <input type="number">
+                        <input id="pesoAmarela" type="number">
                     </div>
 
                 </div>
@@ -249,7 +242,7 @@
                     Observações
                 </h2>
 
-                <textarea rows="6"></textarea>
+                <textarea id="observacao" rows="6"></textarea>
 
             </section>
 
